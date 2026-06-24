@@ -15,14 +15,6 @@ public class EstadoClienteController : ControllerBase
     [HttpGet]
     public ActionResult<List<EstadoClienteResponse>> Get()
     {
-        /*
-         * POO
-         encapsulamiento
-         herencia
-         polimorfismo
-         abstraccion
-         */
-        //aqui vamos a retornar una lista de objetos
         var estados = new List<EstadoClienteResponse>
         {
             new EstadoClienteResponse { Id = 1, Codigo = "ACT", Descripcion = "Activo" },
@@ -31,6 +23,21 @@ public class EstadoClienteController : ControllerBase
         };
         return Ok(estados);
     }
+
+
+    [HttpGet("banco/{codigoBanco}")]
+    public ActionResult<List<EstadoClienteResponse>> Get(string codigoBanco)
+    {
+        var estados = new List<EstadoClienteResponse>
+        {
+            new EstadoClienteResponse { Id = 1, Codigo = "ACT", Descripcion = "Activo" },
+            new EstadoClienteResponse { Id = 2, Codigo = "INA", Descripcion = "Inactivo" },
+            new EstadoClienteResponse { Id = 3, Codigo = "PEN", Descripcion = "Pendiente" },
+            new EstadoClienteResponse { Id = 4, Codigo = "xxx", Descripcion = codigoBanco }
+        };
+        return Ok(estados);
+    }
+
 
     [HttpPost]
     public ActionResult<string> Post([FromBody] EstadoClienteRequest request)
