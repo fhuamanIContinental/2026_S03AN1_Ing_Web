@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/01 API/">
+    <Project Path="S03AN1.Api/S03AN1.Api.csproj" Id="d3ae65a4-9c03-4cd0-bf99-f35df5e36fa1" />
+  </Folder>
+  <Folder Name="/02 Negocio/">
+    <Project Path="S03AN1.Negocio/S03AN1.Negocio.csproj" Id="5224f199-76b2-4cbd-af4f-794a5ea8f9b7" />
+  </Folder>
+  <Folder Name="/03 Repositorio/">
+    <Project Path="S03AN1.Repositorio/S03AN1.Repositorio.csproj" Id="d7e2a576-7996-445f-9345-770437be1a34" />
+  </Folder>
+  <Folder Name="/04 Modelos/">
+    <Project Path="S03AN1.Modelos/S03AN1.Modelos.csproj" Id="5574e78b-3348-4e14-bf12-426ffe2a9e40" />
+  </Folder>
+</Solution>
