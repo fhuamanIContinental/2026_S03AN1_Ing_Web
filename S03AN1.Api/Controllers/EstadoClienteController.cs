@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Negocio.EstadoCliente;
 
 namespace S03AN1.Api.Controllers;
 
@@ -8,58 +9,53 @@ namespace S03AN1.Api.Controllers;
 [ApiController]
 public class EstadoClienteController : ControllerBase
 {
+    #region variables y constructor
+
+    //declaración de variables
+    private readonly IEstadoClienteNegocio _estadoClienteNegocio;
+
+    //genereación del constructor
+    public EstadoClienteController(IEstadoClienteNegocio estadoClienteNegocio)
+    {
+        _estadoClienteNegocio = estadoClienteNegocio;
+    }
+
+    #endregion
+
+
 
     //nosotros vamos a construir end points basados en HTTP
     //GET POST PUT DELETE
 
     [HttpGet]
-    public ActionResult<List<EstadoClienteResponse>> Get()
+    public async Task<ActionResult<List<EstadoClienteResponse>>> Get()
     {
-        var estados = new List<EstadoClienteResponse>
-        {
-            new EstadoClienteResponse { Id = 1, Codigo = "ACT", Descripcion = "Activo" },
-            new EstadoClienteResponse { Id = 2, Codigo = "INA", Descripcion = "Inactivo" },
-            new EstadoClienteResponse { Id = 3, Codigo = "PEN", Descripcion = "Pendiente" }
-        };
-        return Ok(estados);
-    }
 
+        List<EstadoClienteResponse> estados = await _estadoClienteNegocio.GetAll();
 
-    [HttpGet("banco/{codigoBanco}")]
-    public ActionResult<List<EstadoClienteResponse>> Get(string codigoBanco)
-    {
-        var estados = new List<EstadoClienteResponse>
-        {
-            new EstadoClienteResponse { Id = 1, Codigo = "ACT", Descripcion = "Activo" },
-            new EstadoClienteResponse { Id = 2, Codigo = "INA", Descripcion = "Inactivo" },
-            new EstadoClienteResponse { Id = 3, Codigo = "PEN", Descripcion = "Pendiente" },
-            new EstadoClienteResponse { Id = 4, Codigo = "xxx", Descripcion = codigoBanco }
-        };
         return Ok(estados);
     }
 
 
     [HttpPost]
-    public ActionResult<string> Post([FromBody] EstadoClienteRequest request)
+    public async Task<ActionResult<EstadoClienteResponse>> Post([FromBody] EstadoClienteRequest request)
     {
-        //aqui vamos a recibir un objeto de tipo EstadoClienteRequest
-        //y vamos a retornar un mensaje de exito
-        return Ok("CREADO");
+        EstadoClienteResponse resultado = await _estadoClienteNegocio.Create(request);
+        return Ok(resultado);
     }
 
     [HttpPut("{id}")]
-    public ActionResult<string> Put(int id, [FromBody] EstadoClienteRequest request)
+    public async Task<ActionResult<EstadoClienteResponse>> Put(int id, [FromBody] EstadoClienteRequest request)
     {
-        //aqui vamos a recibir un objeto de tipo EstadoClienteRequest
-        //y vamos a retornar un mensaje de exito
-        return Ok("ACTUALIZADO");
+        EstadoClienteResponse resultado = await _estadoClienteNegocio.Update(id, request);
+        return Ok(resultado);
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
+    public async Task<ActionResult<bool>> Delete(int id)
     {
-        //aqui vamos a recibir un id de tipo int
-        //y vamos a retornar un mensaje de exito
-        return Ok("ELIMINADO");
+        bool resultado = await _estadoClienteNegocio.Delete(id);
+
+        return Ok(resultado);
     }
 }
