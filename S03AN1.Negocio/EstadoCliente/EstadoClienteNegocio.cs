@@ -1,4 +1,5 @@
 ﻿using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Repositorio.EstadoCliente;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,41 +8,46 @@ namespace S03AN1.Negocio.EstadoCliente
 {
     public class EstadoClienteNegocio : IEstadoClienteNegocio
     {
+        #region variables y constructor
+        private readonly IEstadoClienteRepositorio _estadoClienteRepositorio;
+
+        public EstadoClienteNegocio(IEstadoClienteRepositorio estadoClienteRepositorio)
+        {
+            _estadoClienteRepositorio = estadoClienteRepositorio;
+        }
+
+        #endregion
+
         public async Task<List<EstadoClienteResponse>> GetAll()
         {
-            var estados = new List<EstadoClienteResponse>
-            {
-                new EstadoClienteResponse { Id = 1, Codigo = "ACT", Descripcion = "Activo" },
-                new EstadoClienteResponse { Id = 2, Codigo = "INA", Descripcion = "Inactivo" },
-                new EstadoClienteResponse { Id = 3, Codigo = "PEN", Descripcion = "Pendiente" }
-            };
-
-            return await Task.FromResult(estados);
+            List<EstadoClienteResponse>  estados = await _estadoClienteRepositorio.GetAll();
+            return estados;
 
         }
 
-        public Task<EstadoClienteResponse> GetById(int id)
+        public async Task<EstadoClienteResponse> GetById(int id)
         {
-            throw new NotImplementedException();
+            EstadoClienteResponse response = await _estadoClienteRepositorio.GetById(id);
+            return response;
         }
 
 
-        public Task<EstadoClienteResponse> Create(EstadoClienteRequest request)
+        public async Task<EstadoClienteResponse> Create(EstadoClienteRequest request)
         {
-            throw new NotImplementedException();
+            EstadoClienteResponse response = await _estadoClienteRepositorio.Create(request);
+            return response;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<EstadoClienteResponse> Update(int id, EstadoClienteRequest request)
         {
-            throw new NotImplementedException();
+            EstadoClienteResponse response = await _estadoClienteRepositorio.Update(id, request);
+            return response;
         }
 
-    
-        
-
-        public Task<EstadoClienteResponse> Update(int id, EstadoClienteRequest request)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            bool result = await _estadoClienteRepositorio.Delete(id);
+            return result;
         }
     }
 }

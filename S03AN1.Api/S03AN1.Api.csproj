@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\S03AN1.Modelos\S03AN1.Modelos.csproj" />
+    <ProjectReference Include="..\S03AN1.Negocio\S03AN1.Negocio.csproj" />
   </ItemGroup>
 
 </Project>

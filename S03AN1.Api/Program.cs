@@ -1,4 +1,5 @@
 using S03AN1.Negocio.EstadoCliente;
+using S03AN1.Repositorio.EstadoCliente;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddOpenApi();
 
 /*INYECCIÓN DE DEPENDENCIAS*/
 builder.Services.AddScoped<IEstadoClienteNegocio, EstadoClienteNegocio>();
+builder.Services.AddScoped<IEstadoClienteRepositorio, EstadoClienteRepositorio>();
 
 var app = builder.Build();
 
