@@ -1,0 +1,20 @@
+
+
+ESTE ES EL COMANDO QUE NOSOTROS VAMOS A UTILIZAR PARA MAPEAR TODOS LOS OBJETOS DE BASE DE DATOS
+
+
+Scaffold-DbContext  ==> COMANDO PARA ENTITY FRAMEWORK
+"name=DbCicloud" ==> LA CADENA DE CONEXIÓN A BASE DE DATOS  DbCicloud (es la configuración en el appSettings.json)
+Microsoft.EntityFrameworkCore.SqlServer  => es el nombre de la librería con la que estamos trabajando (vamos a remplazar con POMELO......)
+-OutputDir "CICLOUD"  ==> Es el nombre de la carpeta donde se mapeara los objetos de base de datos
+-DataAnnotations -Context "_CicloudContext"   ==> es el nombre de nuestro archivo que mapeara todos los objetos de base de datos
+-NoPluralize  ==> se le indica que no se cambie el nombre de la tabla (si no ponemos esto, cambiara el nombre de la tabla "PERSONA" por "PERSONS")
+-Force  ==> Fuerza la actualización de cambios en DB hacia .NET
+
+
+
+COMANDO FINAL PARA TRABAJAR CON MYSQL
+
+Scaffold-DbContext "Server=localhost;Port=3306;Database=2026_S03AN1;User=root;Password=root123;" Pomelo.EntityFrameworkCore.MySql -OutputDir "DbColegio" -DataAnnotations -Context "_dbContext" -NoPluralize -Force
+
+

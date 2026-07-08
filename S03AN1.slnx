@@ -9,6 +9,7 @@
     <Project Path="S03AN1.Repositorio/S03AN1.Repositorio.csproj" Id="d7e2a576-7996-445f-9345-770437be1a34" />
   </Folder>
   <Folder Name="/04 Modelos/">
+    <Project Path="S03AN1.DbModel/S03AN1.DbModel.csproj" Id="14f8bcf8-89ee-4f14-be39-43ea7726eb18" />
     <Project Path="S03AN1.Modelos/S03AN1.Modelos.csproj" Id="5574e78b-3348-4e14-bf12-426ffe2a9e40" />
   </Folder>
 </Solution>
