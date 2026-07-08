@@ -18,6 +18,10 @@ namespace S03AN1.Negocio.EstadoCliente
 
         #endregion
 
+        /// <summary>
+        /// Obtiene todos los estados de cliente
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<EstadoClienteResponse>> GetAll()
         {
             List<EstadoClienteResponse>  estados = await _estadoClienteRepositorio.GetAll();

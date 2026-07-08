@@ -1,5 +1,7 @@
+using Microsoft.OpenApi.Models;
 using S03AN1.Negocio.EstadoCliente;
 using S03AN1.Repositorio.EstadoCliente;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +25,26 @@ builder.Services.AddCors(options =>
     });
 });
 
-
+/*  AQUI VAMOS A CONFIGURAR NUESTRO SWAGGER*/
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "mi primer swagger",
+        Version = "v1",
+        Description = "Documentación de nuestras APIs",
+        Contact = new OpenApiContact
+        {
+            Name = "Franklin Huamán",
+            Email = "fhuaman@continental.edu.pe",
+            Url = new Uri("https://icontinental.edu.pe/"),
+        },
+    });
+    c.MapType<string>(() => new OpenApiSchema { Nullable = true });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 
 /*INYECCIÓN DE DEPENDENCIAS*/
@@ -36,6 +57,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    //VAMOS A LEVANTAR LA INTERFACES GRAFICA DE SWAGGER
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
