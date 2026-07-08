@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using S03AN1.Api.Extension;
 using S03AN1.Negocio.EstadoCliente;
 using S03AN1.Repositorio.EstadoCliente;
 using System.Reflection;
@@ -40,6 +41,10 @@ builder.Services.AddSwaggerGen(c =>
             Url = new Uri("https://icontinental.edu.pe/"),
         },
     });
+    // Agregar descripciones de tags/controladores
+    c.TagActionsBy(api => new[] { api.GroupName ?? api.ActionDescriptor.RouteValues["controller"] });
+    c.DocInclusionPredicate((name, api) => true);
+
     c.MapType<string>(() => new OpenApiSchema { Nullable = true });
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -57,9 +62,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    // AGREGAR MIDDLEWARE PARA SERVIR EL JSON DE SWAGGER
+    app.UseSwagger();
     //VAMOS A LEVANTAR LA INTERFACES GRAFICA DE SWAGGER
     app.UseSwaggerUI();
 }
+
+//REGISTRANDO NUESTRO MIDLEWARE PERSONALIZADO EN EL PIPELINE DE LA APLICACIÓN
+app.UseCustomMidleware();
 
 app.UseHttpsRedirection();
 

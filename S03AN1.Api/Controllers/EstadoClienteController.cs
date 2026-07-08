@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Modelos.General;
 using S03AN1.Negocio.EstadoCliente;
 
 namespace S03AN1.Api.Controllers;
@@ -34,21 +35,21 @@ public class EstadoClienteController : ControllerBase
     /// <returns></returns>
 
     [HttpGet]
-    public async Task<ActionResult<List<EstadoClienteResponse>>> Get()
+    public async Task<ActionResult<GeneralResponse<List<EstadoClienteResponse>>>> Get()
     {
-        List<EstadoClienteResponse> estados = await _estadoClienteNegocio.GetAll();
-        return Ok(estados);
+        GeneralResponse<List<EstadoClienteResponse>> response = await _estadoClienteNegocio.GetAll();
+        return Ok(response);
     }
 
     /// <summary>
     /// Crea un nuevo estado de cliente.
     /// </summary>
-    /// <param name="request"></param>
-    /// <returns></returns>
+    /// <param name="request">Datos del estado de cliente a crear.</param>
+    /// <returns>El estado de cliente creado.</returns>
     [HttpPost]
-    public async Task<ActionResult<EstadoClienteResponse>> Post([FromBody] EstadoClienteRequest request)
+    public async Task<ActionResult<GeneralResponse<EstadoClienteResponse>>> Post([FromBody] EstadoClienteRequest request)
     {
-        EstadoClienteResponse resultado = await _estadoClienteNegocio.Create(request);
+        GeneralResponse<EstadoClienteResponse> resultado = await _estadoClienteNegocio.Create(request);
         return Ok(resultado);
     }
 
@@ -59,9 +60,9 @@ public class EstadoClienteController : ControllerBase
     /// <param name="request">Datos del estado de cliente a actualizar.</param>
     /// <returns>El estado de cliente actualizado.</returns>
     [HttpPut("{id}")]
-    public async Task<ActionResult<EstadoClienteResponse>> Put(int id, [FromBody] EstadoClienteRequest request)
+    public async Task<ActionResult<GeneralResponse<EstadoClienteResponse>>> Put(int id, [FromBody] EstadoClienteRequest request)
     {
-        EstadoClienteResponse resultado = await _estadoClienteNegocio.Update(id, request);
+        GeneralResponse<EstadoClienteResponse> resultado = await _estadoClienteNegocio.Update(id, request);
         return Ok(resultado);
     }
 
@@ -71,9 +72,9 @@ public class EstadoClienteController : ControllerBase
     /// <param name="id">ID del estado de cliente a eliminar.</param>
     /// <returns>Indica si la eliminación fue exitosa.</returns>
     [HttpDelete("{id}")]
-    public async Task<ActionResult<bool>> Delete(int id)
+    public async Task<ActionResult<GeneralResponse<bool>>> Delete(int id)
     {
-        bool resultado = await _estadoClienteNegocio.Delete(id);
+        GeneralResponse<bool> resultado = await _estadoClienteNegocio.Delete(id);
 
         return Ok(resultado);
     }

@@ -1,4 +1,5 @@
 ﻿using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Modelos.General;
 using S03AN1.Repositorio.EstadoCliente;
 using System;
 using System.Collections.Generic;
@@ -22,36 +23,70 @@ namespace S03AN1.Negocio.EstadoCliente
         /// Obtiene todos los estados de cliente
         /// </summary>
         /// <returns></returns>
-        public async Task<List<EstadoClienteResponse>> GetAll()
+        public async Task<GeneralResponse<List<EstadoClienteResponse>>> GetAll()
         {
             List<EstadoClienteResponse>  estados = await _estadoClienteRepositorio.GetAll();
-            return estados;
-
+            return new GeneralResponse<List<EstadoClienteResponse>>
+            {
+                Content = estados,
+                Success = true,
+                TextMessage = "Operación exitosa",
+                TitleMessage = "Estados de cliente obtenidos correctamente",
+                ShowAlert = false
+            };
         }
 
-        public async Task<EstadoClienteResponse> GetById(int id)
+        public async Task<GeneralResponse<EstadoClienteResponse>> GetById(int id)
         {
             EstadoClienteResponse response = await _estadoClienteRepositorio.GetById(id);
-            return response;
+            return new GeneralResponse<EstadoClienteResponse>
+            {
+                Content = response,
+                Success = true,
+                TextMessage = "Operación exitosa",
+                TitleMessage = "Estado de cliente obtenido correctamente",
+                ShowAlert = false
+            };
         }
 
 
-        public async Task<EstadoClienteResponse> Create(EstadoClienteRequest request)
+        public async Task<GeneralResponse<EstadoClienteResponse>> Create(EstadoClienteRequest request)
         {
             EstadoClienteResponse response = await _estadoClienteRepositorio.Create(request);
-            return response;
+            return new GeneralResponse<EstadoClienteResponse>
+            {
+                Content = response,
+                Success = true,
+                TextMessage = "Operación exitosa",
+                TitleMessage = "Estado de cliente creado correctamente",
+                ShowAlert = false
+            };
         }
 
-        public async Task<EstadoClienteResponse> Update(int id, EstadoClienteRequest request)
+        public async Task<GeneralResponse<EstadoClienteResponse>> Update(int id, EstadoClienteRequest request)
         {
             EstadoClienteResponse response = await _estadoClienteRepositorio.Update(id, request);
-            return response;
+            return new GeneralResponse<EstadoClienteResponse>
+            {
+                Content = response,
+                Success = true,
+                TextMessage = "Operación exitosa",
+                TitleMessage = "Estado de cliente actualizado correctamente",
+                ShowAlert = false
+            };
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task<GeneralResponse<bool>> Delete(int id)
         {
             bool result = await _estadoClienteRepositorio.Delete(id);
-            return result;
+            return new GeneralResponse<bool>
+            {
+                Content = result,
+                Success = true,
+                TextMessage = "Operación exitosa",
+                TitleMessage = "Estado de cliente eliminado correctamente",
+                ShowAlert = false
+            };
         }
     }
 }

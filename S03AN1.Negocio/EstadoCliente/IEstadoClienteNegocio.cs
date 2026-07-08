@@ -1,4 +1,5 @@
 ﻿using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Modelos.General;
 
 namespace S03AN1.Negocio.EstadoCliente
 {
@@ -17,31 +18,31 @@ namespace S03AN1.Negocio.EstadoCliente
         /// Obtiene todos los estados de cliente.
         /// </summary>
         /// <returns></returns>
-        Task<List<EstadoClienteResponse>> GetAll();
+        Task<GeneralResponse<List<EstadoClienteResponse>>> GetAll();
         /// <summary>
         /// Obtiene un estado de cliente por su ID.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<EstadoClienteResponse> GetById(int id);
+        Task<GeneralResponse<EstadoClienteResponse>> GetById(int id);
         /// <summary>
         /// Crea un nuevo estado de cliente.
         /// </summary>
         /// <param name="request">Datos del estado de cliente a crear.</param>
         /// <returns>El estado de cliente creado.</returns>
-        Task<EstadoClienteResponse> Create(EstadoClienteRequest request);
+        Task<GeneralResponse<EstadoClienteResponse>> Create(EstadoClienteRequest request);
         /// <summary>
         /// Actualiza un estado de cliente existente por su ID.
         /// </summary>
         /// <param name="id">ID del estado de cliente a actualizar.</param>
         /// <param name="request">Datos del estado de cliente a actualizar.</param>
         /// <returns>El estado de cliente actualizado.</returns>
-        Task<EstadoClienteResponse> Update(int id, EstadoClienteRequest request);
+        Task<GeneralResponse<EstadoClienteResponse>> Update(int id, EstadoClienteRequest request);
         /// <summary>
         /// Elimina un estado de cliente por su ID.
         /// </summary>
         /// <param name="id">ID del estado de cliente a eliminar.</param>
         /// <returns>Indica si la eliminación fue exitosa.</returns>
-        Task<bool> Delete(int id);
+        Task<GeneralResponse<bool>> Delete(int id);
     }
 }
