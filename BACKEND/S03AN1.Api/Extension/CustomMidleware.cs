@@ -32,23 +32,23 @@ namespace S03AN1.Api.Extension
 
             string? codigoAplicaion = context.Request.Headers["code-application"];
 
-            if (string.IsNullOrEmpty(codigoAplicaion))
-            {
-                //vamos a retornar una respuesta con general response
-                context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Response.ContentType = "application/json";
+            //if (string.IsNullOrEmpty(codigoAplicaion))
+            //{
+            //    //vamos a retornar una respuesta con general response
+            //    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            //    context.Response.ContentType = "application/json";
 
-                var response = new GeneralResponse
-                {
-                    ShowAlert = true,
-                    Success = false,
-                    TextMessage = "ERROR MIDLEWARE",
-                    TitleMessage = "NO SE ENVIO ALGUNA VARIABLE"
-                };
+            //    var response = new GeneralResponse
+            //    {
+            //        ShowAlert = true,
+            //        Success = false,
+            //        TextMessage = "ERROR MIDLEWARE",
+            //        TitleMessage = "NO SE ENVIO ALGUNA VARIABLE"
+            //    };
 
-                await context.Response.WriteAsync(JsonSerializer.Serialize(response));
-                return;
-            }
+            //    await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+            //    return;
+            //}
 
 
 

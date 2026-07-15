@@ -102,11 +102,15 @@
           .catch(() => mostrarAlerta('Error al cargar los estados.', 'danger'));
       }
 
-      function renderTabla(estados) {
+      function renderTabla(data) {
+        debugger;
+        console.log("data ==> ", data);
+        
+
         const tbody = document.getElementById('tbody-estados');
         tbody.innerHTML = '';
 
-        estados.forEach(e => {
+        data.content.forEach(e => {
           const tr = document.createElement('tr');
           tr.innerHTML = `
             <td>${e.id}</td>
@@ -126,6 +130,7 @@
 
       // ── POST / PUT ─────────────────────────────────────────────────────────────
       function guardarEstado(e) {
+        debugger;
         e.preventDefault();
 
         const id          = document.getElementById('campo-id').value;

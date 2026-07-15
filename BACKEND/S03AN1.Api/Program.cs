@@ -68,13 +68,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Habilitar CORS
+app.UseCors("AllowAll");
+
 //REGISTRANDO NUESTRO MIDLEWARE PERSONALIZADO EN EL PIPELINE DE LA APLICACIÓN
 app.UseCustomMidleware();
 
 app.UseHttpsRedirection();
 
-// Habilitar CORS
-app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
