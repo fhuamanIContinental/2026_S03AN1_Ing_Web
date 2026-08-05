@@ -1,0 +1,172 @@
+<div class="container-fluid min-vh-100 bg-body-tertiary">
+	<div class="row min-vh-100 flex-nowrap">
+		<aside class="col-auto p-0 border-end bg-light-subtle d-none" [class.d-lg-flex]="!sidebarCollapsed()">
+			<div class="d-flex flex-column w-100" style="min-width: 280px;">
+				<div class="px-4 py-3 border-bottom">
+					<h1 class="h5 mb-1 text-body-emphasis d-flex align-items-center gap-2">
+						<i class="bi bi-buildings" aria-hidden="true"></i>
+						<span>Panel Academico</span>
+					</h1>
+					<p class="small text-body-secondary mb-0">Gestion institucional</p>
+				</div>
+
+				<div class="flex-grow-1 overflow-auto py-3">
+					<nav class="nav nav-pills flex-column gap-1 px-3">
+						<span class="small text-uppercase text-body-secondary px-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-gear" aria-hidden="true"></i><span>Mantenimiento</span></span>
+						<a class="nav-link d-flex align-items-center gap-2" [routerLink]="['/Dashboard', 'estado-cliente']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><i class="bi bi-people" aria-hidden="true"></i><span>Estado Cliente</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-person-badge" aria-hidden="true"></i><span>Docentes y Personal</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-journal-bookmark" aria-hidden="true"></i><span>Cursos y Secciones</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-calendar3" aria-hidden="true"></i><span>Aulas y Horarios</span></a>
+
+						<span class="small text-uppercase text-body-secondary px-3 mt-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-diagram-3" aria-hidden="true"></i><span>Proceso</span></span>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-clipboard-check" aria-hidden="true"></i><span>Inscripcion Anual</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Control de Asistencia</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-clipboard2-data" aria-hidden="true"></i><span>Evaluaciones</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-bar-chart" aria-hidden="true"></i><span>Reportes Operativos</span></a>
+
+						<span class="small text-uppercase text-body-secondary px-3 mt-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-card-checklist" aria-hidden="true"></i><span>Matricula</span></span>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-person-plus" aria-hidden="true"></i><span>Nueva Matricula</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-arrow-repeat" aria-hidden="true"></i><span>Renovacion de Matricula</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-receipt" aria-hidden="true"></i><span>Estado de Cuenta</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-credit-card-2-front" aria-hidden="true"></i><span>Historial de Pago</span></a>
+
+						<span class="small text-uppercase text-body-secondary px-3 mt-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-grid" aria-hidden="true"></i><span>Otros</span></span>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-bell" aria-hidden="true"></i><span>Notificaciones</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-life-preserver" aria-hidden="true"></i><span>Ayuda y Soporte</span></a>
+						<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-sliders" aria-hidden="true"></i><span>Configuracion</span></a>
+					</nav>
+				</div>
+
+				<div class="border-top p-3 small text-body-secondary">
+					Ultima sincronizacion: Hoy 08:00
+				</div>
+			</div>
+		</aside>
+
+		<div class="col p-0 d-flex flex-column">
+			<header class="border-bottom bg-body">
+				<div class="d-flex align-items-center justify-content-between px-3 px-md-4 py-3">
+					<div class="d-flex align-items-center gap-2">
+						<button
+							type="button"
+							class="btn btn-outline-secondary d-none d-lg-inline-flex"
+							(click)="toggleSidebar()"
+							[attr.aria-pressed]="sidebarCollapsed()"
+							[title]="sidebarCollapsed() ? 'Mostrar menu lateral' : 'Ocultar menu lateral'"
+						>
+							@if (sidebarCollapsed()) {
+								<i class="bi bi-layout-sidebar-inset" aria-hidden="true"></i>
+								<span class="visually-hidden">Mostrar menu lateral</span>
+							} @else {
+								<i class="bi bi-layout-sidebar" aria-hidden="true"></i>
+								<span class="visually-hidden">Ocultar menu lateral</span>
+							}
+						</button>
+						<button
+							class="btn btn-outline-secondary d-lg-none"
+							type="button"
+							data-bs-toggle="offcanvas"
+							data-bs-target="#sidebarMobile"
+							aria-controls="sidebarMobile"
+							aria-label="Abrir menu"
+						>
+							<i class="bi bi-list" aria-hidden="true"></i>
+						</button>
+						<div>
+							<h2 class="h5 mb-0 text-body-emphasis">Dashboard</h2>
+							<p class="small text-body-secondary mb-0">Resumen general de operaciones</p>
+						</div>
+					</div>
+
+					<div class="d-flex align-items-center gap-2 gap-md-3">
+						<button
+							type="button"
+							class="btn btn-sm btn-outline-secondary"
+							(click)="toggleDarkMode()"
+							[attr.aria-pressed]="darkMode()"
+						>
+							@if (darkMode()) {
+								<i class="bi bi-sun" aria-hidden="true"></i>
+								<span class="visually-hidden">Cambiar a modo claro</span>
+							} @else {
+								<i class="bi bi-moon-stars" aria-hidden="true"></i>
+								<span class="visually-hidden">Cambiar a modo oscuro</span>
+							}
+						</button>
+						<button type="button" class="btn btn-sm btn-outline-secondary" aria-label="Exportar">
+							<i class="bi bi-download" aria-hidden="true"></i>
+						</button>
+						<button type="button" class="btn btn-sm btn-outline-secondary" aria-label="Actualizar">
+							<i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+						</button>
+						<div class="vr d-none d-md-block"></div>
+						<div class="text-end">
+							<p class="mb-0 small fw-semibold text-body-emphasis">Administrador</p>
+							<p class="mb-0 small text-body-secondary">admin@colegio.edu</p>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<main class="flex-grow-1 overflow-auto p-3 p-md-4">
+				<section class="card border-0 shadow-sm h-100">
+					<div class="card-body">
+						<div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+							<h3 class="h6 text-uppercase text-body-secondary mb-0">Workspace</h3>
+							<span class="badge text-bg-light border">Area de componentes</span>
+						</div>
+
+						<div class="border rounded-3 bg-body-tertiary p-3 p-md-4 h-100">
+							<router-outlet></router-outlet>
+						</div>
+					</div>
+				</section>
+			</main>
+
+			<footer class="border-top bg-body">
+				<div class="px-3 px-md-4 py-3 d-flex flex-column flex-md-row justify-content-between gap-2 small text-body-secondary">
+					<span>Sistema de Gestion Escolar</span>
+					<span>Version 1.0.0 | Soporte: Mesa de Ayuda</span>
+				</div>
+			</footer>
+		</div>
+	</div>
+</div>
+
+<div
+	class="offcanvas offcanvas-start d-lg-none"
+	tabindex="-1"
+	id="sidebarMobile"
+	aria-labelledby="sidebarMobileLabel"
+>
+	<div class="offcanvas-header border-bottom">
+		<h4 class="offcanvas-title h6 mb-0" id="sidebarMobileLabel">Panel Academico</h4>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+	</div>
+	<div class="offcanvas-body p-0">
+		<nav class="nav nav-pills flex-column gap-1 p-3">
+			<span class="small text-uppercase text-body-secondary px-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-gear" aria-hidden="true"></i><span>Mantenimiento</span></span>
+			<a class="nav-link d-flex align-items-center gap-2" [routerLink]="['/Dashboard', 'estado-cliente']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" data-bs-dismiss="offcanvas"><i class="bi bi-people" aria-hidden="true"></i><span>Estado Cliente</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-person-badge" aria-hidden="true"></i><span>Docentes y Personal</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-journal-bookmark" aria-hidden="true"></i><span>Cursos y Secciones</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-calendar3" aria-hidden="true"></i><span>Aulas y Horarios</span></a>
+
+			<span class="small text-uppercase text-body-secondary px-3 mt-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-diagram-3" aria-hidden="true"></i><span>Proceso</span></span>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-clipboard-check" aria-hidden="true"></i><span>Inscripcion Anual</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-check2-square" aria-hidden="true"></i><span>Control de Asistencia</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-clipboard2-data" aria-hidden="true"></i><span>Evaluaciones</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-bar-chart" aria-hidden="true"></i><span>Reportes Operativos</span></a>
+
+			<span class="small text-uppercase text-body-secondary px-3 mt-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-card-checklist" aria-hidden="true"></i><span>Matricula</span></span>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-person-plus" aria-hidden="true"></i><span>Nueva Matricula</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-arrow-repeat" aria-hidden="true"></i><span>Renovacion de Matricula</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-receipt" aria-hidden="true"></i><span>Estado de Cuenta</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-credit-card-2-front" aria-hidden="true"></i><span>Historial de Pago</span></a>
+
+			<span class="small text-uppercase text-body-secondary px-3 mt-3 mb-1 d-flex align-items-center gap-2"><i class="bi bi-grid" aria-hidden="true"></i><span>Otros</span></span>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-bell" aria-hidden="true"></i><span>Notificaciones</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-life-preserver" aria-hidden="true"></i><span>Ayuda y Soporte</span></a>
+			<a class="nav-link text-body d-flex align-items-center gap-2" href="#"><i class="bi bi-sliders" aria-hidden="true"></i><span>Configuracion</span></a>
+		</nav>
+	</div>
+</div>

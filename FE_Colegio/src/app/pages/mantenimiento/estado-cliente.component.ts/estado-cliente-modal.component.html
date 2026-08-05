@@ -1,0 +1,76 @@
+@if (visible()) {
+  <div
+    class="modal fade show d-block"
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="estadoClienteModalTitle"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow">
+        <div class="modal-header">
+          <h2 class="modal-title fs-6" id="estadoClienteModalTitle">
+            @if (estado()) {
+              Editar estado cliente
+            } @else {
+              Nuevo estado cliente
+            }
+          </h2>
+          <button type="button" class="btn-close" aria-label="Cerrar" (click)="onClose()"></button>
+        </div>
+
+        <form [formGroup]="estadoClienteForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="modal-codigo" class="form-label">Codigo</label>
+              <input
+                id="modal-codigo"
+                type="text"
+                class="form-control"
+                formControlName="Codigo"
+                placeholder="Ej.: ACT"
+                maxlength="20"
+              />
+              @if ((submitted() || estadoClienteForm.controls.Codigo.touched) && estadoClienteForm.controls.Codigo.invalid) {
+                <div class="text-danger small mt-1">El codigo es obligatorio (maximo 20 caracteres).</div>
+              }
+            </div>
+
+            <div>
+              <label for="modal-descripcion" class="form-label">Descripcion</label>
+              <textarea
+                id="modal-descripcion"
+                class="form-control"
+                formControlName="Descripcion"
+                rows="3"
+                placeholder="Describe el estado del cliente"
+                maxlength="120"
+              ></textarea>
+              @if ((submitted() || estadoClienteForm.controls.Descripcion.touched) && estadoClienteForm.controls.Descripcion.invalid) {
+                <div class="text-danger small mt-1">La descripcion es obligatoria (maximo 120 caracteres).</div>
+              }
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="onClose()" aria-label="Cancelar">
+              <i class="bi bi-x-lg" aria-hidden="true"></i>
+              <span class="visually-hidden">Cancelar</span>
+            </button>
+            <button type="submit" class="btn btn-primary" [attr.aria-label]="estado() ? 'Guardar cambios' : 'Crear estado'">
+              @if (estado()) {
+                <i class="bi bi-check2" aria-hidden="true"></i>
+                <span class="visually-hidden">Guardar cambios</span>
+              } @else {
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                <span class="visually-hidden">Crear estado</span>
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop fade show" (click)="onClose()"></div>
+}
