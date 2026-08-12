@@ -1,7 +1,21 @@
 using Microsoft.OpenApi.Models;
 using S03AN1.Api.Extension;
+using S03AN1.Negocio.Cliente;
+using S03AN1.Negocio.ClienteSuscripcion;
 using S03AN1.Negocio.EstadoCliente;
+using S03AN1.Negocio.EstadoSuscripcion;
+using S03AN1.Negocio.Mascota;
+using S03AN1.Negocio.Persona;
+using S03AN1.Negocio.Plan;
+using S03AN1.Negocio.UsuarioPlataforma;
+using S03AN1.Repositorio.Cliente;
+using S03AN1.Repositorio.ClienteSuscripcion;
 using S03AN1.Repositorio.EstadoCliente;
+using S03AN1.Repositorio.EstadoSuscripcion;
+using S03AN1.Repositorio.Mascota;
+using S03AN1.Repositorio.Persona;
+using S03AN1.Repositorio.Plan;
+using S03AN1.Repositorio.UsuarioPlataforma;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,6 +69,28 @@ builder.Services.AddSwaggerGen(c =>
 /*INYECCIÓN DE DEPENDENCIAS*/
 builder.Services.AddScoped<IEstadoClienteNegocio, EstadoClienteNegocio>();
 builder.Services.AddScoped<IEstadoClienteRepositorio, EstadoClienteRepositorio>();
+
+builder.Services.AddScoped<IClienteNegocio, ClienteNegocio>();
+builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+
+builder.Services.AddScoped<IClienteSuscripcionNegocio, ClienteSuscripcionNegocio>();
+builder.Services.AddScoped<IClienteSuscripcionRepositorio, ClienteSuscripcionRepositorio>();
+
+builder.Services.AddScoped<IEstadoSuscripcionNegocio, EstadoSuscripcionNegocio>();
+builder.Services.AddScoped<IEstadoSuscripcionRepositorio, EstadoSuscripcionRepositorio>();
+
+builder.Services.AddScoped<IPlanNegocio, PlanNegocio>();
+builder.Services.AddScoped<IPlanRepositorio, PlanRepositorio>();
+
+builder.Services.AddScoped<IUsuarioPlataformaNegocio, UsuarioPlataformaNegocio>();
+builder.Services.AddScoped<IUsuarioPlataformaRepositorio, UsuarioPlataformaRepositorio>();
+
+builder.Services.AddScoped<IMascotaNegocio, MascotaNegocio>();
+builder.Services.AddScoped<IMascotaRepositorio, MascotaRepositorio>();
+
+builder.Services.AddScoped<IPersonaNegocio, PersonaNegocio>();
+builder.Services.AddScoped<IPersonaRepositorio, PersonaRepositorio>();
+
 
 var app = builder.Build();
 
