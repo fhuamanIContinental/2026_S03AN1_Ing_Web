@@ -1,97 +1,13 @@
-using Microsoft.EntityFrameworkCore;
 using S03AN1.DbModel.DbColegio;
 using S03AN1.Modelos.Cliente;
+using S03AN1.Repositorio.General;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace S03AN1.Repositorio.Cliente
 {
-    public class ClienteRepositorio : IClienteRepositorio
+    public class ClienteRepositorio : GenericRepositorio<DboCliente, ClienteRequest, ClienteResponse, int>, IClienteRepositorio
     {
-        private readonly _dbContext _db = new _dbContext();
-
-        public async Task<List<ClienteResponse>> GetAll()
-        {
-            List<DboCliente> listaBd = await _db.DboCliente.ToListAsync();
-
-            return listaBd.Select(MapToResponse).ToList();
-        }
-
-        public async Task<ClienteResponse?> GetById(int id)
-        {
-            DboCliente? dbres = await _db.DboCliente.FindAsync(id);
-            if (dbres is null) return null;
-
-            return MapToResponse(dbres);
-        }
-
-        public async Task<ClienteResponse?> Create(ClienteRequest request)
-        {
-            DboCliente newObject = new DboCliente
-            {
-                Ruc = request.Ruc,
-                Codigo = request.Codigo,
-                RazonSocial = request.RazonSocial,
-                NombreComercial = request.NombreComercial,
-                Direccion = request.Direccion,
-                Telefono = request.Telefono,
-                CorreoContacto = request.CorreoContacto,
-                ServidorSql = request.ServidorSql,
-                BdNombre = request.BdNombre,
-                BdUsuario = request.BdUsuario,
-                BdPasswordCifrada = request.BdPasswordCifrada,
-                IdEstado = request.IdEstado,
-                FechaActivacion = request.FechaActivacion,
-                FechaCreacion = DateTime.UtcNow,
-                UsuarioCreacion = request.UsuarioCreacion
-            };
-
-            await _db.DboCliente.AddAsync(newObject);
-            await _db.SaveChangesAsync();
-
-            return MapToResponse(newObject);
-        }
-
-        public async Task<ClienteResponse?> Update(int id, ClienteRequest request)
-        {
-            DboCliente? dbres = await _db.DboCliente.FindAsync(id);
-            if (dbres is null) return null;
-
-            dbres.Ruc = request.Ruc;
-            dbres.Codigo = request.Codigo;
-            dbres.RazonSocial = request.RazonSocial;
-            dbres.NombreComercial = request.NombreComercial;
-            dbres.Direccion = request.Direccion;
-            dbres.Telefono = request.Telefono;
-            dbres.CorreoContacto = request.CorreoContacto;
-            dbres.ServidorSql = request.ServidorSql;
-            dbres.BdNombre = request.BdNombre;
-            dbres.BdUsuario = request.BdUsuario;
-            dbres.BdPasswordCifrada = request.BdPasswordCifrada;
-            dbres.IdEstado = request.IdEstado;
-            dbres.FechaActivacion = request.FechaActivacion;
-            dbres.FechaModificacion = DateTime.UtcNow;
-            dbres.UsuarioModificacion = request.UsuarioModificacion;
-
-            _db.DboCliente.Update(dbres);
-            await _db.SaveChangesAsync();
-
-            return MapToResponse(dbres);
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            DboCliente? dbres = await _db.DboCliente.FindAsync(id);
-            if (dbres is null) return false;
-
-            _db.DboCliente.Remove(dbres);
-            await _db.SaveChangesAsync();
-            return true;
-        }
-
-        private static ClienteResponse MapToResponse(DboCliente x)
+        protected override ClienteResponse MapToResponse(DboCliente x)
         {
             return new ClienteResponse
             {
@@ -114,6 +30,47 @@ namespace S03AN1.Repositorio.Cliente
                 UsuarioCreacion = x.UsuarioCreacion,
                 UsuarioModificacion = x.UsuarioModificacion
             };
+        }
+
+        protected override DboCliente MapToEntity(ClienteRequest request)
+        {
+            return new DboCliente
+            {
+                Ruc = request.Ruc,
+                Codigo = request.Codigo,
+                RazonSocial = request.RazonSocial,
+                NombreComercial = request.NombreComercial,
+                Direccion = request.Direccion,
+                Telefono = request.Telefono,
+                CorreoContacto = request.CorreoContacto,
+                ServidorSql = request.ServidorSql,
+                BdNombre = request.BdNombre,
+                BdUsuario = request.BdUsuario,
+                BdPasswordCifrada = request.BdPasswordCifrada,
+                IdEstado = request.IdEstado,
+                FechaActivacion = request.FechaActivacion,
+                FechaCreacion = DateTime.UtcNow,
+                UsuarioCreacion = request.UsuarioCreacion
+            };
+        }
+
+        protected override void UpdateEntity(DboCliente entity, ClienteRequest request)
+        {
+            entity.Ruc = request.Ruc;
+            entity.Codigo = request.Codigo;
+            entity.RazonSocial = request.RazonSocial;
+            entity.NombreComercial = request.NombreComercial;
+            entity.Direccion = request.Direccion;
+            entity.Telefono = request.Telefono;
+            entity.CorreoContacto = request.CorreoContacto;
+            entity.ServidorSql = request.ServidorSql;
+            entity.BdNombre = request.BdNombre;
+            entity.BdUsuario = request.BdUsuario;
+            entity.BdPasswordCifrada = request.BdPasswordCifrada;
+            entity.IdEstado = request.IdEstado;
+            entity.FechaActivacion = request.FechaActivacion;
+            entity.FechaModificacion = DateTime.UtcNow;
+            entity.UsuarioModificacion = request.UsuarioModificacion;
         }
     }
 }

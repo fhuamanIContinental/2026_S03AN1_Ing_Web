@@ -39,6 +39,19 @@ public class PersonaController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene el listado de personas de manera paginada.
+    /// </summary>
+    /// <param name="pageNumber">Número de página (por defecto 1).</param>
+    /// <param name="pageSize">Tamaño de página (por defecto 10).</param>
+    /// <returns>Objeto con elementos paginados y metadata.</returns>
+    [HttpGet("paginated")]
+    public async Task<ActionResult<GeneralResponse<PaginatedResponse<PersonaResponse>>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        GeneralResponse<PaginatedResponse<PersonaResponse>> response = await _personaNegocio.GetPaginated(pageNumber, pageSize);
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Obtiene una persona por su ID.
     /// </summary>
     /// <param name="id">ID de la persona a buscar.</param>

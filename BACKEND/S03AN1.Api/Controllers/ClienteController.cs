@@ -39,6 +39,19 @@ public class ClienteController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene el listado de clientes de manera paginada.
+    /// </summary>
+    /// <param name="pageNumber">Número de página (por defecto 1).</param>
+    /// <param name="pageSize">Tamaño de página (por defecto 10).</param>
+    /// <returns>Objeto con elementos paginados y metadata.</returns>
+    [HttpGet("paginated")]
+    public async Task<ActionResult<GeneralResponse<PaginatedResponse<ClienteResponse>>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        GeneralResponse<PaginatedResponse<ClienteResponse>> response = await _clienteNegocio.GetPaginated(pageNumber, pageSize);
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Obtiene un cliente por su ID.
     /// </summary>
     /// <param name="id">ID del cliente a buscar.</param>

@@ -1,13 +1,9 @@
-﻿using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Modelos.EstadoCliente;
+using S03AN1.Repositorio.General;
 
 namespace S03AN1.Repositorio.EstadoCliente
 {
-    public interface IEstadoClienteRepositorio
+    public interface IEstadoClienteRepositorio : IGenericRepositorio<EstadoClienteRequest, EstadoClienteResponse, int>
     {
-        Task<List<EstadoClienteResponse>> GetAll();
-        Task<EstadoClienteResponse?> GetById(int id);
-        Task<EstadoClienteResponse?> Create(EstadoClienteRequest request);
-        Task<EstadoClienteResponse?> Update(int id, EstadoClienteRequest request);
-        Task<bool> Delete(int id);
     }
 }

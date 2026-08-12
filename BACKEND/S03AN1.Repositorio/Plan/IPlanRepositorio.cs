@@ -1,15 +1,9 @@
 using S03AN1.Modelos.Plan;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using S03AN1.Repositorio.General;
 
 namespace S03AN1.Repositorio.Plan
 {
-    public interface IPlanRepositorio
+    public interface IPlanRepositorio : IGenericRepositorio<PlanRequest, PlanResponse, int>
     {
-        Task<List<PlanResponse>> GetAll();
-        Task<PlanResponse?> GetById(int id);
-        Task<PlanResponse?> Create(PlanRequest request);
-        Task<PlanResponse?> Update(int id, PlanRequest request);
-        Task<bool> Delete(int id);
     }
 }

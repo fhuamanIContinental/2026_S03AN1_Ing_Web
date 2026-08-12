@@ -39,6 +39,19 @@ public class ClienteSuscripcionController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene el listado de suscripciones de clientes de manera paginada.
+    /// </summary>
+    /// <param name="pageNumber">Número de página (por defecto 1).</param>
+    /// <param name="pageSize">Tamaño de página (por defecto 10).</param>
+    /// <returns>Objeto con elementos paginados y metadata.</returns>
+    [HttpGet("paginated")]
+    public async Task<ActionResult<GeneralResponse<PaginatedResponse<ClienteSuscripcionResponse>>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        GeneralResponse<PaginatedResponse<ClienteSuscripcionResponse>> response = await _clienteSuscripcionNegocio.GetPaginated(pageNumber, pageSize);
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Obtiene una suscripción por su ID.
     /// </summary>
     /// <param name="id">ID de la suscripción a buscar.</param>

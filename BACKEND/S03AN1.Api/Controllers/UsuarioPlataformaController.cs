@@ -39,6 +39,19 @@ public class UsuarioPlataformaController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene el listado de usuarios de la plataforma de manera paginada.
+    /// </summary>
+    /// <param name="pageNumber">Número de página (por defecto 1).</param>
+    /// <param name="pageSize">Tamaño de página (por defecto 10).</param>
+    /// <returns>Objeto con elementos paginados y metadata.</returns>
+    [HttpGet("paginated")]
+    public async Task<ActionResult<GeneralResponse<PaginatedResponse<UsuarioPlataformaResponse>>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        GeneralResponse<PaginatedResponse<UsuarioPlataformaResponse>> response = await _usuarioPlataformaNegocio.GetPaginated(pageNumber, pageSize);
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Obtiene un usuario de plataforma por su ID.
     /// </summary>
     /// <param name="id">ID del usuario a buscar.</param>

@@ -1,15 +1,9 @@
 using S03AN1.Modelos.EstadoSuscripcion;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using S03AN1.Repositorio.General;
 
 namespace S03AN1.Repositorio.EstadoSuscripcion
 {
-    public interface IEstadoSuscripcionRepositorio
+    public interface IEstadoSuscripcionRepositorio : IGenericRepositorio<EstadoSuscripcionRequest, EstadoSuscripcionResponse, int>
     {
-        Task<List<EstadoSuscripcionResponse>> GetAll();
-        Task<EstadoSuscripcionResponse?> GetById(int id);
-        Task<EstadoSuscripcionResponse?> Create(EstadoSuscripcionRequest request);
-        Task<EstadoSuscripcionResponse?> Update(int id, EstadoSuscripcionRequest request);
-        Task<bool> Delete(int id);
     }
 }

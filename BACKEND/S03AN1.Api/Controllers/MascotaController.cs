@@ -39,6 +39,19 @@ public class MascotaController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene el listado de mascotas de manera paginada.
+    /// </summary>
+    /// <param name="pageNumber">Número de página (por defecto 1).</param>
+    /// <param name="pageSize">Tamaño de página (por defecto 10).</param>
+    /// <returns>Objeto con elementos paginados y metadata.</returns>
+    [HttpGet("paginated")]
+    public async Task<ActionResult<GeneralResponse<PaginatedResponse<MascotaResponse>>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        GeneralResponse<PaginatedResponse<MascotaResponse>> response = await _mascotaNegocio.GetPaginated(pageNumber, pageSize);
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Obtiene una mascota por su ID.
     /// </summary>
     /// <param name="id">ID de la mascota a buscar.</param>

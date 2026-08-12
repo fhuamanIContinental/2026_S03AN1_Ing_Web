@@ -1,15 +1,9 @@
 using S03AN1.Modelos.Cliente;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using S03AN1.Repositorio.General;
 
 namespace S03AN1.Repositorio.Cliente
 {
-    public interface IClienteRepositorio
+    public interface IClienteRepositorio : IGenericRepositorio<ClienteRequest, ClienteResponse, int>
     {
-        Task<List<ClienteResponse>> GetAll();
-        Task<ClienteResponse?> GetById(int id);
-        Task<ClienteResponse?> Create(ClienteRequest request);
-        Task<ClienteResponse?> Update(int id, ClienteRequest request);
-        Task<bool> Delete(int id);
     }
 }

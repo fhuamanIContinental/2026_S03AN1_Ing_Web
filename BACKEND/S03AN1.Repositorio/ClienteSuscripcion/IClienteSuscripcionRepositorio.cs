@@ -1,15 +1,9 @@
 using S03AN1.Modelos.ClienteSuscripcion;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using S03AN1.Repositorio.General;
 
 namespace S03AN1.Repositorio.ClienteSuscripcion
 {
-    public interface IClienteSuscripcionRepositorio
+    public interface IClienteSuscripcionRepositorio : IGenericRepositorio<ClienteSuscripcionRequest, ClienteSuscripcionResponse, long>
     {
-        Task<List<ClienteSuscripcionResponse>> GetAll();
-        Task<ClienteSuscripcionResponse?> GetById(long id);
-        Task<ClienteSuscripcionResponse?> Create(ClienteSuscripcionRequest request);
-        Task<ClienteSuscripcionResponse?> Update(long id, ClienteSuscripcionRequest request);
-        Task<bool> Delete(long id);
     }
 }

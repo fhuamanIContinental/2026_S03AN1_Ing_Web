@@ -1,15 +1,9 @@
 using S03AN1.Modelos.UsuarioPlataforma;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using S03AN1.Repositorio.General;
 
 namespace S03AN1.Repositorio.UsuarioPlataforma
 {
-    public interface IUsuarioPlataformaRepositorio
+    public interface IUsuarioPlataformaRepositorio : IGenericRepositorio<UsuarioPlataformaRequest, UsuarioPlataformaResponse, long>
     {
-        Task<List<UsuarioPlataformaResponse>> GetAll();
-        Task<UsuarioPlataformaResponse?> GetById(long id);
-        Task<UsuarioPlataformaResponse?> Create(UsuarioPlataformaRequest request);
-        Task<UsuarioPlataformaResponse?> Update(long id, UsuarioPlataformaRequest request);
-        Task<bool> Delete(long id);
     }
 }

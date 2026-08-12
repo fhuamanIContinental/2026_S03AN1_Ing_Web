@@ -39,6 +39,19 @@ public class EstadoSuscripcionController : ControllerBase
     }
 
     /// <summary>
+    /// Obtiene el listado de estados de suscripción de manera paginada.
+    /// </summary>
+    /// <param name="pageNumber">Número de página (por defecto 1).</param>
+    /// <param name="pageSize">Tamaño de página (por defecto 10).</param>
+    /// <returns>Objeto con elementos paginados y metadata.</returns>
+    [HttpGet("paginated")]
+    public async Task<ActionResult<GeneralResponse<PaginatedResponse<EstadoSuscripcionResponse>>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+    {
+        GeneralResponse<PaginatedResponse<EstadoSuscripcionResponse>> response = await _estadoSuscripcionNegocio.GetPaginated(pageNumber, pageSize);
+        return Ok(response);
+    }
+
+    /// <summary>
     /// Obtiene un estado de suscripción por su ID.
     /// </summary>
     /// <param name="id">ID del estado de suscripción a buscar.</param>
